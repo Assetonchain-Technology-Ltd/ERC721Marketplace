@@ -1,0 +1,22 @@
+OrderStateMachine 
+
+OPEN : markTrade    -> PSET
+PSET : executeTrade -> EXEC  ** in function
+PSET : executeTrade -> PART
+PART : executeTrade -> EXEC  ** in function 
+OPEN : cancelTrade  -> CANC
+PSET : cancelTrade  -> CANC
+PART : cancelTrade  -> CANC
+PART : expireTrade  -> EXPI
+PSET : expireTrade  -> EXPI
+EXEC : executeExpensebook -> EXEC1
+
+
+markTrade 94f84d9c36f5152d9fa88c82fb72e1e7a2911d125f55249dc8d1357f3de2c7a5
+executeTrade 202a2fb30921492b30ba19ebce80d6e086173c9320fb7033f2da015bdcf01bc3
+cancelTrade 719d97e9ae4a7a783edc681f16cc608755f21246bec4bffe2985ce538531fd38
+
+expireTrade 470c75ef2af3dd411e477725ad47d25573fcd3a8b10079eca6b100ca9d1970b4
+
+executeExpensebook 2dd5d323edfaf7e94d777d265b4f99109536d4a93d97a29d1671c958c707e9f1
+

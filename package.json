@@ -1,0 +1,20 @@
+{
+  "name": "erc721marketplace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "openzeppelin-solidity": "^3.1.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/cli": "^2.8.2"
+  }
+}

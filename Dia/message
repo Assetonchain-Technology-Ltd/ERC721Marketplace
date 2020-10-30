@@ -1,0 +1,60 @@
+O1 Orderbook - getTrade Only user that pass compliance check can get trade detail.
+O2 Orderbook - openTrade Only allow for expensebook.
+O3 Orderbook - executeTrade is not allow to call at current state.
+O4 Orderbook - executeTrade Only user that pass compliance check can executeTrade.
+O5 Orderbook - executeTrade Only the same buyer can settle balance.
+O6 Orderbook - executeTrade Insufficient Account Balance.
+O7 Orderbook - executeTrade Insufficient amount.
+O8 Orderbook - executeTrade Insufficient Account Balacne.
+O9 Orderbook - executeTrade balance must pay in full amount.
+
+O10 Trade can be cancelled only by poster.
+O11 Orderbook - cancelTrade is not allow to call at current state.
+O12 Orderbook - setDeposit Only allow for expensebook.
+O13 Orderbook - setDeposit mini deposit must smaller than price and greater than current mini deposit.
+O14 Orderbook - openTrade order amount must greater than 0.
+O15 Orderbook - withdrawDiamonToken item is not belongs to Orderbook.
+O16 Orderbook - withdrawToken withdraw amount excess Orderbook balance.
+O17 Orderbook - executeTrade can only make by Paymentbook	.
+O18 Orderbook - openTrade the item owner is neither expensebook or the original owner.
+O19 Orderbook - executeExpensebook - Orderbook balance is not enough. 
+O20 Orderbook - executeExpensebook Only allow for paymentbook.
+O21 Orderbook - expireTrade is not allow to call at current state.
+O22 Orderbook - expireTrade The Trade is still within protection period.
+
+
+E0 Expensebook - Only Admin or the order's Seller can get the order's detail.
+E1 Expensebook - createOrderReqeust fail - There is open trade for the item.
+E2 Expensebook - createOrderReqeust fail - There is open order for the item.
+E3 Expensebook - createOrderReqeust fail - Only user that pass compliance check can create order request.
+E4 Expensebook - createOrderReqeust fail - Only Token owner can create Order request.
+E5 Expensebook - createOrderReqeust fail - Item unit price must be greate than or equal zero.
+E6 Expensebook - Only Admin can reject Order Request
+E7 Expensebook - rejectRequest is not allow to call at current state.
+E8 Expensebook - Only Admin or the order's Seller can cancel Request.
+E9 Expensebook - cancelRequest is not allow to call at current state.
+E10 Expensebook - Only Admin can accept Order Request
+E11 Expensebook - acceptRequest is not allow to call at current state.
+E12 Expensebook - Only Admin can cancel Order.
+E13 Expensebook - cancelOrder is not allow to call at current state.
+E14 Expensebook - Only Admin can add Trade
+E15 Expensebook - addTrade is not allow to call at current state
+E16 Expensebook - addTrade , another open trade is found in order book.
+E17 Expensebook - Only Admin can cancel Trade
+E18 Expensebook - cancelTrade is not allow to call at current state.
+E19 Expensebook - Only orderbook can fullfill Trade
+E20 Expensebook - fullFullTrade is not allow to call at current state.
+E21 Expensebook - Only Admin can update INV settlement date
+E22 Expensebook - updateINV_settledate is not allow to call at current state.
+E23 Expensebook - Only Admin or the order's Seller can update settle reference.
+E24 Expensebook - updateINV_settleURL is not allow to call at current state.
+E25 Expensebook - Only Admin can update INV payment reference
+E26 Expensebook - updateINV_paymentURL is not allow to call at current state.
+E27 Expensebook - Only Admin can update INV meta data
+E28 Expensebook - Only Admin or the order's Seller can confirm settle.
+E29 Expensebook - updateINV_confirm is not allow to call at current state.
+E30 Expensebook - acceptRequest the listing price must greater than or equal to seller's request price.
+
+P1
+
+

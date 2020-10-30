@@ -1,0 +1,32 @@
+
+OI : acceptRequest : SC
+OI : rejectRequest : OI-R
+OI : cancelRequest : CANC
+SC : addTrade      : SC
+SC : cancelTrade   : SC
+SC : cancelOrder   : CANC
+
+SC : fullFillTrade : INV
+INV : updateINV_settledate : INV-P
+INV : updateINV_settleURL  : INV
+INV : updateINV_paymentURL : INV
+INV-P : updateINV_settledate : INV-P
+INV-P : updateINV_settleURL  : INV-P
+INV-P : updateINV_paymentURL : INV-P
+INV-P : updateINV_confirm    : SETTLE
+
+
+acceptRequest 0c7fb3d56856547144d2a30a77590071a28c565a1a2391f3fdcf7630cabc35d2
+rejectRequest c128773b28c23c538dab0dc04f5cd9445c34239cf49c7fa5d0ce4d5006e757fe
+cancelRequest f46a524c40491008e6bfc7b3fca634134c7b505ebd421f48661f0a28bcf8ab40
+addTrade f2ad5b9fc42536d1585df8c8299bc8265d2f0331717a6422660750117b7202bb
+cancelTrade 719d97e9ae4a7a783edc681f16cc608755f21246bec4bffe2985ce538531fd38
+cancelOrder  24b7694ab1a6053d6e1db4dd33f2fd9443e6f2fad8856c11799279ec724bfa15
+fullFillTrade d2e33103ad9ac95ebac402e999aa368e31f7b22a3873fe19effed77e19c2c26e
+updateINV_settledate 099e0ea1a432db14936e848a757729a51a77e0d5467db5706823974834bab5c9
+updateINV_settleURL 4b57ad9eca0acf0323455afc4e44b7fed55e4748a9a1932538eed2f90f9f4ec5
+updateINV_paymentURL fff2b8fbaa463ea7a9031e151c816c397755c496ea5831ede7d26ca0e7af4982
+updateINV_confirm b5490c44ac2f5fc5a5c0652f3bc22777e0916370d7110d5baf59bbe17a28e51f
+
+
+
