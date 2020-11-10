@@ -7,37 +7,32 @@ contract expenseBookProxy is expenseBookDS {
     address public implementation;
 
 
-    constructor (address _orderbook, address _diamondtoken, address _statemachine,address _bookeep,address _access ) public virtual
+    constructor (address _statemachine) public virtual
     {
-        orderbook = Orderbook(_orderbook);
-        diamondtoken = ERC721(_diamondtoken);
-        bookkeepingtoken = PaymentBook(_bookeep);
+       
         statemachine = StateMachine(_statemachine);
-        access = PermissionControl(_access);
         //_setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         currencydecimal["HKD"]=2;
         currencydecimal["USD"]=2;
         feesprecentage_decimal = 2;
-        diamondtoken.setApprovalForAll(_orderbook,true);
-        owner = msg.sender;
         _orderID.increment();
         
     }
     
 
     function upgradeTo(address _address) public {
-        require( (access.hasRole(access.ADMIN_ROLE(),msg.sender)) , "E0");
+        require( _isAdmin(msg.sender) , "E0");
         implementation = _address;
     }
     
     function setOrdBook(address _orderbook) public {
-        require( (access.hasRole(access.ADMIN_ROLE(),msg.sender)) , "E0");
-        orderbook=Orderbook(_orderbook);
+        require( _isCR(msg.sender) , "E0");
+        orderbook=orderbookLibrary(_orderbook);
     }
     
     function setbookkeep(address _bookkeep) public {
-        require( (access.hasRole(access.ADMIN_ROLE(),msg.sender)) , "E0");
-        bookkeepingtoken=PaymentBook(_bookkeep);
+        require( _isCR(msg.sender) , "E0");
+        bookkeepingtoken=_bookkeep;
     }
     
     function setStateMachine(address _machine) public  {
