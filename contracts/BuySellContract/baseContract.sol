@@ -3,6 +3,7 @@ pragma solidity ^0.6.0;
 import "openzeppelin-solidity/contracts/access/RBAC.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721Holder.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/utils/Counters.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
@@ -44,12 +45,10 @@ abstract contract  BaseContract {
      PermissionControl access;
      
      constructor (uint256 _itemid, address _base,uint256  _price, string memory _currency,
-                    uint256 _createdatetime,address _access, address _sellside) public {
+                    uint256 _createdatetime,address _access) public {
         access = PermissionControl(_access);
         require(_isAdmin(msg.sender) || _isSales(msg.sender) || _isExpense(msg.sender),"E0");
         (ERC721ID,ERC721baseaddress)=(_itemid,_base);
-        seller = msg.sender;
-        creditor = _sellside;
         feesprecentage = 0;
         currency = _currency;
         paymenttype = 0;
@@ -122,6 +121,13 @@ abstract contract  BaseContract {
         return debtor;
     }
     
+    function getSeller() public view
+    returns(address a)
+    {
+        require( _isOrderViewer(msg.sender), "E0");
+        return seller;
+    }
+    
     function getMeta(uint64 _key) public view
     returns(string memory s)
     {
@@ -188,8 +194,12 @@ abstract contract  BaseContract {
          debtor = _d;
     }
     
+    function setSeller(address _d) public 
+    {
+         require( _isAdmin(msg.sender) || _isOrder(msg.sender), "E0");
+         seller = _d;
+    }
     
-
     
     function setMindeposit(uint256 _a) public
     {
@@ -205,13 +215,20 @@ abstract contract  BaseContract {
 
     }
     
-    function withdrawalToken(uint256 _id,address _dest) public 
+    function withdrawalERC721Token(uint256 _id,address _dest) public 
     {
         require( _isAdmin(msg.sender) || _isExpense(msg.sender) || _isOrder(msg.sender), "E0");
         ERC721 token = ERC721(ERC721baseaddress);
         _id = (_id==0)?ERC721ID:_id;
         require(token.ownerOf(_id)==address(this),"XE");
         token.safeTransferFrom(address(this),_dest,_id);
+    }
+    
+    function withdrawalERC20Token(address base,uint256 _amount,address _dest) public 
+    {
+        require( _isAdmin(msg.sender) || _isExpense(msg.sender) || _isOrder(msg.sender), "E0");
+        ERC20 token = ERC20(base);
+        token.transfer(_dest,_amount);
     }
     
     function addSettlementPlan(uint256 _amount,uint256 _settlementdate,uint256 _datetime,bool _active)public

@@ -18,11 +18,11 @@ contract orderBookDS {
 
     address expensebook;
     address bookkeepingtoken;
+    address account_receivable;
     address platform;
     address platformfees;
     StateMachine statemachine;
     PermissionControl access;
-    ERC721 erc721token;
     uint256 fixdeposit;
     uint256 percentage_decimal;
     uint256 depositpercentage;

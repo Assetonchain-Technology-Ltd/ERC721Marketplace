@@ -28,6 +28,11 @@ contract orderBookProxy is orderBookDS {
         require( _isCR(msg.sender) , "E0");
         expensebook=_expensebookproxy;
     }
+
+    function setAccountReceivable(address _a) public {
+        require( _isCR(msg.sender),"E0");
+        account_receivable = _a;
+    }
     
     function setbookkeep(address _bookkeep) public {
         require( _isCR(msg.sender) , "E0");

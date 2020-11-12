@@ -17,7 +17,6 @@ contract expenseBookDS {
 
     address bookkeepingtoken;
     orderbookLibrary orderbook;
-    ERC721 erc721token;
     StateMachine statemachine;
     PermissionControl access;
     uint256 feesprecentage_decimal;

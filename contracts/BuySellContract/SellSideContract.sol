@@ -2,35 +2,24 @@ pragma solidity ^0.6.0;
 
 import "./baseContract.sol";
 
-contract SellSideContract is BaseContract{
-    
-    
-    Counters.Counter private _tradecount;
-    struct trade{
-        uint256 tradeID;
-        uint256 datetime;
-    } 
+
+contract SellSideContract is BaseContract {
+
+     address sellsidecontract;
+     uint256 tradeID;
      
-     mapping(uint256 => trade) trades;
-                
-     constructor (uint256  _itemid,address _base, uint256  _price, uint256 _feesprecentage, string memory _currency,
-                    uint256 _createdatetime,address _access, address _sellside, address _buyside) 
-                public BaseContract( _itemid,  _base,  _price, _currency,_createdatetime, _access,  _sellside) 
+     constructor (uint256 _itemid, address _base,uint256  _price, string memory _currency,
+                    uint256 _createdatetime,address _access, address _seller,uint256 _tradeID,address _sellsidecontract) 
+                public BaseContract( _itemid,  _base,  _price, _currency,_createdatetime, _access) 
     {
-        debtor = _buyside;
-        feesprecentage = _feesprecentage;
-       
-        state = "OI";
-        stateChange["OI"]=_createdatetime;
+        require(_isAdmin(msg.sender) || _isSales(msg.sender) || _isExpense(msg.sender),"E0");
+        creditor = msg.sender;
+        seller = _seller;
+        sellsidecontract = _sellsidecontract;
+        tradeID = _tradeID;
+        
         
     } 
-    
-
-    function getTradeID() override public view
-    returns(uint256 _d)
-    {
-        return trades[_tradecount.current()].tradeID;
-    }
     
     
     function getOrderDetail() public override view
@@ -38,21 +27,28 @@ contract SellSideContract is BaseContract{
     {
         require( _isOrderViewer(msg.sender), "E0");
         
-        return (trades[_tradecount.current()].tradeID,ERC721ID,ERC721baseaddress,unit_price,feesprecentage,currency,mindeposit,creditor,debtor,state,_settlementcount.current());
-    }    
+        return (tradeID,ERC721ID,ERC721baseaddress,unit_price,feesprecentage,currency,mindeposit,creditor,debtor,state,_settlementcount.current());
+    }         
     
-    
-    function setTradeID(uint256 _id,uint256 _datetime) public 
+    function getSellSideContract() public view
+    returns(address _a)
     {
-         require( _isAdmin(msg.sender) || _isExpense(msg.sender), "E0");
+        require( _isOrderViewer(msg.sender), "E0");
         
-         trades[_tradecount.current()-1].tradeID=_id;
-         trades[_tradecount.current()-1].datetime=_datetime;
-         _tradecount.increment();
-         
+        return (sellsidecontract);
+    }
 
+    function getTradeID() override public view
+    returns(uint256 _d)
+    {
+        return tradeID;
     }
     
-  
+    function setTrade(uint256 _id) public 
+    {
+         require( _isAdmin(msg.sender) || _isOrder(msg.sender), "E0");
+         tradeID = _id;
+
+    }
   
 }

@@ -35,6 +35,11 @@ contract expenseBookProxy is expenseBookDS {
         bookkeepingtoken=_bookkeep;
     }
     
+    function setPermissionControl(address _a)public {
+        require(_isCR(msg.sender),"E0");
+        access = PermissionControl(_a);
+    }
+    
     function setStateMachine(address _machine) public  {
         require( (access.hasRole(access.ADMIN_ROLE(),msg.sender)) , "E0");
         statemachine=StateMachine(_machine);

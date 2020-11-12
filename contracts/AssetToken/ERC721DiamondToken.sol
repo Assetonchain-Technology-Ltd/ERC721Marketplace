@@ -11,25 +11,21 @@ pragma solidity ^0.6.0;
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721Burnable.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721Pausable.sol";
-import "openzeppelin-solidity/contracts/access/AccessControl.sol";
+import "openzeppelin-solidity/contracts/access/RBAC.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/utils/Address.sol";
 import "./DiamondContract.sol";
 
-contract TestingERC721 is AccessControl,ERC721Burnable, ERC721Pausable {
+contract TestingERC721 is ERC721Burnable, ERC721Pausable {
     event NewToken(uint256 itemid,address owner,string url);
     using SafeMath for uint256;
     using Address for address;
-	bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE"); 
+    PermissionControl access;
     DiamondContract public diamond;
     
-	constructor(string memory _symbolname,string memory _symbol,string memory _baseURI) public ERC721(_symbolname, _symbol) {
-		 _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-
-        _setupRole(MINTER_ROLE, _msgSender());
-        _setupRole(PAUSER_ROLE, _msgSender());
-
+	constructor(string memory _symbolname,string memory _symbol,string memory _baseURI, address _access) public ERC721(_symbolname, _symbol) {
+		 
+		 access = PermissionControl(_access);
         _setBaseURI(_baseURI);
 
 
@@ -40,7 +36,7 @@ contract TestingERC721 is AccessControl,ERC721Burnable, ERC721Pausable {
         public
         returns (uint256)
     {
-		require(hasRole(MINTER_ROLE, _msgSender()), "TestingERC721 : must have minter role to mint");
+		require(access.hasRole(access.ADMIN_ROLE(),msg.sender), "TestingERC721 : must have minter role to mint");
 		diamond = new DiamondContract(supplier,color,threeEX,clarity,carat,gia);
 		uint256 tokenID = uint256(address(diamond));
         _mint(player, tokenID);
@@ -50,7 +46,7 @@ contract TestingERC721 is AccessControl,ERC721Burnable, ERC721Pausable {
     }
 
 	function mint(address to) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "ERC721PresetMinterPauserAutoId: must have minter role to mint");
+        require(access.hasRole(access.ADMIN_ROLE(), msg.sender), "ERC721PresetMinterPauserAutoId: must have minter role to mint");
 
     }
     
