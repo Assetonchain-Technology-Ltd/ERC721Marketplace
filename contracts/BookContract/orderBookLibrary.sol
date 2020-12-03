@@ -1,55 +1,38 @@
 pragma solidity ^0.6.0;
 
-import "../BuySellContract/SellSideContract.sol";
+import "../BuySellContract/SellSideContractFactory.sol";
 import "../BuySellContract/baseContractAccesser.sol";
+import "../BuySellContract/BuySideContractAccesser.sol";
 import "./orderBookDS.sol";
-import "openzeppelin-solidity/contracts/presets/ERC20PresetMinterPauser.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 
 
-contract orderbookLibrary is orderBookDS ,baseContractAccessor{
+
+contract orderbookLibrary is orderBookDS ,baseContractAccessor , buySideContractAccessor{
     event TradeStatusChange(uint256 ad,string action,string status,address b,uint256 p,uint256 d);
     event NewTrade(uint256 t, address seller, uint256 itemID,uint256 p,address o,uint256 m,uint256 _datetime);
-
-    function getTradeCount() public view 
-    returns (uint256 c)
-    {
-        return _tradeID.current() - 1;
-    }
     
  
     function setindividualDeposit(uint256 _tradeid,uint256 _deposit) public{
         address order = trades[_tradeid];
-        require(_isAdmin(msg.sender) || _isSales(msg.sender), "O12");
-        require(_deposit > _getTradeMindeposit(order)&& _deposit < _getTotalAmount(order),"O13");
+        require(_isAdmin(msg.sender) || _isSales(msg.sender), "O1");
+        require(_deposit > _getTradeMindeposit(order)&& _deposit < _getTotalAmount(order),"O2");
         _setMindeposit(order,_deposit); 
     }
-
     
-    function getdepositpercentage() public view
-    returns (uint256)
-    {
-        return depositpercentage;
-    }
-     
-    function setdepositpercentage(uint256 u) public {
-            depositpercentage = u;
-    }
-
-    
-    function openTrade(uint256 _itemID, address _base,uint256 _price,address _sellsideorder, uint256 _datetime,string memory _currency) public virtual
+    function openTrade(uint256 _itemID,address _base,uint256 _price,address _sellsideorder, uint256 _datetime,string memory _currency) public virtual
     returns (uint256 tradeid)
     {
-        require( _isExpense(msg.sender) || _isAdmin(msg.sender) || _isSales(msg.sender), "O2");
-        require( _price > 0 , "O14" );
-        require(_ownerOf(_base,_itemID)==_sellsideorder,"O18");
-        require(isopen[_itemID]==false,"O30");
+        _base = lookup.getBaseAddress(_itemID);
+        require( _isExpense(msg.sender) || _isAdmin(msg.sender) || _isSales(msg.sender), "O3");
+        require( _price > 0 , "O4" );
+        require(_ownerOf(_base,_itemID)==_sellsideorder,"O5");
+        require(isopen[_itemID]==false,"O6");
         _tradeID.increment();
         uint256 currentID = _tradeID.current()-1;
         address _seller = _getCreditor(_sellsideorder);
         uint256 _mindeposit = (fixdeposit>0)?fixdeposit:_price.mul(depositpercentage).div(percentage_decimal.mul(100));
-        SellSideContract b = new SellSideContract(_itemID,_base,_price,_currency,_datetime,address(access),_seller,currentID,_sellsideorder);
-        _base = address(b);
+        SellSideContractFactory c = SellSideContractFactory(contractfactory);
+        _base = c.createNewSellSideContract(_itemID,_base,_price, _sellsideorder, _datetime, _currency,address(access),_seller,currentID);
         _setMindeposit(_base,_mindeposit);
         trades[currentID] = _base;
         _WithdrawERC721Token(_sellsideorder,_itemID,_base);
@@ -64,8 +47,8 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor{
         address i = trades[_trade];
         (bool exist,string memory nextstate) = _transitionExists(_getState(i),"markTrade");
         //profile checking
-        require(exist , "O3");
-        require(_getCreditor(i)!=msg.sender,"O17");
+        require(exist , "O7");
+        require(_getSeller(i)!=msg.sender,"O8");
         _setState(i,nextstate,_datetime);
         _setFeePercent(i,_feespercentage);
         _setDebtor(i,msg.sender);
@@ -89,77 +72,91 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor{
         }
     }
     
-    function executeTrade(uint256 _trade,uint8 _paymenttype, uint256 _amount, string memory _tx,uint256 _datetime) public
+    function executeTrade(uint256 _trade,uint8 _paymenttype, string memory _tx,uint256 _datetime) public
     {
         address i = trades[_trade];
         (bool exist,string memory nextstate) = _transitionExists(_getState(i),"executeTrade");
         //profile checking
-        require(exist , "O3");
-        require( _isAdmin(msg.sender) || _isSettlement(msg.sender), "O2");
-        ERC20PresetMinterPauser bookkeep = ERC20PresetMinterPauser(bookkeepingtoken);
+        require(exist , "O9");
+        require( _isAdmin(msg.sender) || _isSettlement(msg.sender), "O10");
+        ERC20PresetMinterPauser token = ERC20PresetMinterPauser(bookkeepingtoken);
         (uint256 _index,uint256 _d,uint256 _a)=_getActiveSettlementPlan(i);
-        while(_amount>=_a){
-            _completePayment(i,_index,_tx,_datetime,_paymenttype);
-            bookkeep.transferFrom(account_receivable,i,_a);
-            _amount.sub(_a);
-            (_index,_d,_a)=_getActiveSettlementPlan(i);
-        }
+        require(token.balanceOf(account_receivable)>=_a,"O23");
+        token.transferFrom(account_receivable,i,_a);
+        _completePayment(i,_index,_tx,_datetime,_paymenttype);
+        _a = _getTotalAmount(i);
+        _d = _getFeeAmount(i);
+        _a  = _a.add(_d);
         if(_isSettled(i)){
-            address debtor = _getDebtor(i);
-            _a = _getTotalAmount(i);
-            _d = _getFeeAmount(i);
-            _a  = _a.add(_d);
+            uint256 alreadypaid=_getEarlySettle(i);
+            require(token.balanceOf(i)>=_a.sub(alreadypaid),"O22");
+            address d = _getDebtor(i);
             (_a,) = _getItem(i);
-            require(bookkeep.balanceOf(i)>=_a,"O31");
-            _WithdrawERC721Token(i,_a,debtor);
+            _WithdrawERC721Token(i,_a,d);
             _setState(i,"EXEC",_datetime);
             isopen[_a]=false;
-            emit TradeStatusChange(_trade,"executeTrade","EXEC",msg.sender,_amount,_datetime);
+            d = _getCreditor(i);
+            bytes memory payload = abi.encodeWithSignature("fullFillTrade(address,uint256)",d,_datetime);
+            (bool success, ) = expensebook.call(payload);
+            require(success,"O29");
+            emit TradeStatusChange(_trade,"executeTrade","EXEC",msg.sender,_a,_datetime);
         }else{
             _setState(i,nextstate,_datetime);
-            emit TradeStatusChange(_trade,"executeTrade",nextstate,msg.sender,_amount,_datetime);
+            emit TradeStatusChange(_trade,"executeTrade",nextstate,msg.sender,_a,_datetime);
         }
        
     }
     
+   function settleBuySide(uint256 _trade,uint256 _datetime,uint256 _amount) public 
+   {
+       address i = trades[_trade];
+       address buyside = _getCreditor(i);
+       (bool exist,string memory nextstate) = _transitionExists(_getState(i),"settleBuySide");
+       require(exist , "O25");
+       require( _isAdmin(msg.sender) || _isSettlement(msg.sender), "O28");
+       uint256 psettle = _getPlanedSettlementAmount(buyside);
+       ERC20PresetMinterPauser token = ERC20PresetMinterPauser(bookkeepingtoken);
+       require(_amount>0 && _amount<=psettle && token.balanceOf(i)>=_amount,"O27");
+       _WithdrawERC20Token(i,bookkeepingtoken,_amount,buyside);
+       _setEarlySettle(i,_amount);
+       _setMeta(i,2,"settleBuySide Call");
+       _setState(i,nextstate,_datetime);
+   }
    
-    function executeExpensebook(uint256 _trade,uint256 _datetime) public 
+    function profitDistribution(uint256 _trade,uint256 _datetime) public 
     {
         address i = trades[_trade];
-        (bool exist,string memory nextstate) = _transitionExists(_getState(i),"executeExpensebook");
-        require(exist , "O3");
-        require( _isAdmin(msg.sender) || _isSettlement(msg.sender), "O2");
-        address s = _getBuySideContract(i);
+        (bool exist,string memory nextstate) = _transitionExists(_getState(i),"profitDistribution");
+        require(exist , "O12");
+        require( _isAdmin(msg.sender) || _isSettlement(msg.sender), "O13");
+        address s = _getCreditor(i);
+        uint256 earlypay = _getEarlySettle(i);
         uint256 cost =_getTotalAmount(s);
         uint256 sales = _getTotalAmount(i);
-        require(sales>=cost,"O32");
         uint256 fees = _getFeeAmount(i);
         uint256 profit = sales.sub(cost);
-        //profile checking
-        //require(_msgSender()==address(paymentbook),"O20");
-        ERC20PresetMinterPauser bookkeep = ERC20PresetMinterPauser(bookkeepingtoken);
-        require(bookkeep.balanceOf(address(this))>=sales.add(fees),"O23");
-        _WithdrawERC20Token(i,bookkeepingtoken,cost,s);
+        ERC20PresetMinterPauser token = ERC20PresetMinterPauser(bookkeepingtoken);
+        require(token.balanceOf(i)>=cost.sub(earlypay).add(fees),"O15");
+        _WithdrawERC20Token(i,bookkeepingtoken,cost.sub(earlypay),s);
         _WithdrawERC20Token(i,bookkeepingtoken,fees,platformfees);
         _WithdrawERC20Token(i,bookkeepingtoken,profit,platform);
-        bytes memory payload = abi.encodeWithSignature("fullFillTrade(uint256,uint256)",s,_datetime);
-        expensebook.call(payload);
+        _setState(i,nextstate,_datetime);
         
     }
 
-    function cancelTrade(uint256 _trade,uint256 _datetime,bool return2owner)
-        public
+    function cancelTrade(uint256 _trade,uint256 _datetime,bool return2owner) public
     {
         address i = trades[_trade];
         uint256 _itemid;
         (bool exist,string memory nextstate) = _transitionExists(_getState(i),"cancelTrade");
-        require(exist , "O11");
-        address c = _getBuySideContract(i);
+        require(exist , "O16");
+        address c = _getDebtor(i);
+        require( _isAdmin(msg.sender) || _isSettlement(msg.sender) || _isExpense(msg.sender) || msg.sender==c, "O17");
+        c = _getCreditor(i);
         address s = _getSeller(i);
-        require( _isAdmin(msg.sender) || _isSettlement(msg.sender) || _isExpense(msg.sender), "O2");
-        address d = return2owner?s:c;
+        c = return2owner?s:c;
         (_itemid,) = _getItem(i);
-        _WithdrawERC721Token(i,_itemid,d);
+        _WithdrawERC721Token(i,_itemid,c);
         _setState(i,nextstate,_datetime);
         isopen[_itemid]=false;
         emit TradeStatusChange(_trade,"cancelTrade",nextstate,msg.sender,0,_datetime);
@@ -169,18 +166,21 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor{
     function expireTrade(uint256 _trade,uint256 _datetime) public{
         address i = trades[_trade];
         (bool exist,string memory nextstate) = _transitionExists(_getState(i),"expireTrade");
-        require(exist , "O21");
+        require(exist , "O18");
         uint256 _d =_getStateChange(i,_getState(i));
-        require(_datetime>_d,"O33");
+        require(_datetime>_d,"O19");
         _d = _datetime.sub(_d);
-        require(_d.div(86400)>expiryday,"O22");
+        require(_d.div(86400)>expiryday,"O20");
         _setState(i,nextstate,_datetime);
         (_d,) =_getItem(i);
+        address _s =  _getCreditor(i);
+        _WithdrawERC721Token(i,_d,_s);
         isopen[_d]=false;
-        ERC20PresetMinterPauser bookkeep = ERC20PresetMinterPauser(bookkeepingtoken);
-        emit TradeStatusChange(_trade,"expireTrade",nextstate,msg.sender,bookkeep.balanceOf(address(this)),_datetime);
+        emit TradeStatusChange(_trade,"expireTrade",nextstate,msg.sender,0,_datetime);
         
     }
+    
+
     
     function _transitionExists(string memory state,string memory funname) internal view
     returns(bool e,string memory s)
@@ -189,15 +189,7 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor{
         return (exist,ns);
     }
     
-    function _getBuySideContract(address _a) internal 
-    returns(address _c)
-    {
-        bytes memory payload = abi.encodeWithSignature("getSellSideContract()");
-        (bool success, bytes memory result) = _a.call(payload);
-        require(success,"O23");
-        return abi.decode(result, (address));
-    }
-    
+ 
     function _ownerOf(address _base,uint256 _id) public view
     returns(address e)
     {

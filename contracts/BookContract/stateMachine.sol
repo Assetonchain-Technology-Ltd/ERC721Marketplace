@@ -1,38 +1,26 @@
 pragma solidity ^0.6.0;
-//import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
-import "openzeppelin-solidity/contracts/access/Ownable.sol";
-/**
- * @title StateMachine
- * @author Alberto Cuesta Canada
- * @dev Implements a simple state machine:
- *  - All states exist by default.
- *  - No transitions exist by default.
- *  - The state machine starts at "SETUP".
- *  - New transitions can be created while in the "SETUP state".
- */
- 
+import "../utils/access.sol";
 
- 
-contract StateMachine is Ownable{
+  contract StateMachine is Access{
     
     struct rule{
         bool exists;
         string nextState;
     }
- 
+    
  
     event TransitionCreated(string originState, bytes32 functionhash, string targetState);
     event CurrentState(bytes32 state);
 
- 
+    
 
     mapping (string => mapping(bytes32 => rule)) internal _transitions;
 
   
-    constructor()
+    constructor(address _a)
         public
     {
-      
+        access = PermissionControl(_a);
     }
 
 
@@ -48,9 +36,9 @@ contract StateMachine is Ownable{
     /**
      * @dev Create a transition between two states.
      */
-    function createTransition (string memory originState, bytes32 functionhash, string memory targetState)
-       public  onlyOwner
+    function createTransition (string memory originState, bytes32 functionhash, string memory targetState) public 
     {
+        require(_isAdmin(msg.sender),"T01");
         (bool exist, ) = transitionExists(originState, functionhash);
         require(
             (!exist) ,

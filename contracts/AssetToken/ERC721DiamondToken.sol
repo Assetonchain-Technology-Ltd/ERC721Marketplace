@@ -11,24 +11,23 @@ pragma solidity ^0.6.0;
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721Burnable.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721Pausable.sol";
-import "openzeppelin-solidity/contracts/access/RBAC.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/utils/Address.sol";
 import "./DiamondContract.sol";
-
-contract TestingERC721 is ERC721Burnable, ERC721Pausable {
+import "../utils/erc721DirectoryLookup.sol";
+import "../utils/access.sol";
+contract TestingERC721 is ERC721Burnable, ERC721Pausable, Access {
     event NewToken(uint256 itemid,address owner,string url);
     using SafeMath for uint256;
     using Address for address;
-    PermissionControl access;
     DiamondContract public diamond;
+    erc721DirectoryService lookup;
     
-	constructor(string memory _symbolname,string memory _symbol,string memory _baseURI, address _access) public ERC721(_symbolname, _symbol) {
+	constructor(string memory _symbolname,string memory _symbol,string memory _baseURI, address _access,address _lookup) public ERC721(_symbolname, _symbol) {
 		 
 		 access = PermissionControl(_access);
+		 lookup = erc721DirectoryService(_lookup);
         _setBaseURI(_baseURI);
-
-
 
 	}
 
@@ -41,6 +40,7 @@ contract TestingERC721 is ERC721Burnable, ERC721Pausable {
 		uint256 tokenID = uint256(address(diamond));
         _mint(player, tokenID);
         _setTokenURI(tokenID, tokenURI);
+        lookup.setBaseAddress(tokenID,address(this));
         emit  NewToken(tokenID,player,tokenURI);
         return tokenID;
     }
@@ -52,6 +52,19 @@ contract TestingERC721 is ERC721Burnable, ERC721Pausable {
     
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual override(ERC721, ERC721Pausable) {
         super._beforeTokenTransfer(from, to, tokenId);
+    }
+    
+    function setAccess(address _a) public 
+    {
+        require(access.hasRole(access.ADMIN_ROLE(),msg.sender),"ERC721_1");
+        access = PermissionControl(_a);
+        
+    }
+    
+    function setLookup(address _a) public
+    {
+        require(access.hasRole(access.ADMIN_ROLE(),msg.sender),"ERC721_1");
+        lookup = erc721DirectoryService(_a);
     }
 	
 }
