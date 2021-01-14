@@ -9,7 +9,7 @@ import "./orderBookDS.sol";
 
 contract orderbookLibrary is orderBookDS ,baseContractAccessor , buySideContractAccessor{
     event TradeStatusChange(uint256 ad,string action,string status,address b,uint256 p,uint256 d);
-    event NewTrade(uint256 t, address seller, uint256 itemID,uint256 p,address o,uint256 m,uint256 _datetime);
+    event NewTrade(address i,uint256 t, address seller, uint256 itemID,uint256 p,address o,uint256 m,uint256 _datetime);
     
  
     function setindividualDeposit(uint256 _tradeid,uint256 _deposit) public{
@@ -18,6 +18,7 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor , buySideContract
         require(_deposit > _getTradeMindeposit(order)&& _deposit < _getTotalAmount(order),"O2");
         _setMindeposit(order,_deposit); 
     }
+    
     
     function openTrade(uint256 _itemID,address _base,uint256 _price,address _sellsideorder, uint256 _datetime,string memory _currency) public virtual
     returns (uint256 tradeid)
@@ -37,7 +38,7 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor , buySideContract
         trades[currentID] = _base;
         _WithdrawERC721Token(_sellsideorder,_itemID,_base);
         isopen[_itemID]=true;
-        emit NewTrade(currentID,msg.sender,_itemID,_price,_sellsideorder,_mindeposit,_datetime);
+        emit NewTrade(_base,currentID,msg.sender,_itemID,_price,_sellsideorder,_mindeposit,_datetime);
         return currentID;
         
     }
@@ -151,12 +152,14 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor , buySideContract
         (bool exist,string memory nextstate) = _transitionExists(_getState(i),"cancelTrade");
         require(exist , "O16");
         address c = _getDebtor(i);
+        nextstate = (msg.sender==c)?"CANC-C":"CANC-S";
         require( _isAdmin(msg.sender) || _isSettlement(msg.sender) || _isExpense(msg.sender) || msg.sender==c, "O17");
-        c = _getCreditor(i);
         address s = _getSeller(i);
+        c = _getCreditor(i);
         c = return2owner?s:c;
         (_itemid,) = _getItem(i);
         _WithdrawERC721Token(i,_itemid,c);
+        
         _setState(i,nextstate,_datetime);
         isopen[_itemid]=false;
         emit TradeStatusChange(_trade,"cancelTrade",nextstate,msg.sender,0,_datetime);
@@ -180,7 +183,45 @@ contract orderbookLibrary is orderBookDS ,baseContractAccessor , buySideContract
         
     }
     
+    
+    function forfeit(uint256 _trade,uint256 _datetime) public {
+        address i = trades[_trade];
+        (bool exist,string memory nextstate) = _transitionExists(_getState(i),"forfeit");
+        require(exist , "O30");
+        require( _isAdmin(msg.sender) || _isSettlement(msg.sender) , "O31");
+         _setState(i,nextstate,_datetime);
+        uint256 settledAmount = _getSettledAmount(i);
+        uint256 baddebt_amount = _getTotalAmount(i).sub(settledAmount);
+        uint256 forfeit_amount = settledAmount.sub(_getEarlySettle(i));
+        ERC20PresetMinterPauser token = ERC20PresetMinterPauser(bookkeepingtoken);
+        token.transferFrom(account_receivable,baddebt,baddebt_amount);
+        _WithdrawERC20Token(i,bookkeepingtoken,forfeit_amount,client_forfeit);   
+        emit TradeStatusChange(_trade,"_forfeit",nextstate,msg.sender,0,_datetime);
+    }
+    
+    
+    function refund(uint256 _trade,uint256 _datetime) public{
+        address i = trades[_trade];
+        (bool exist,string memory nextstate) = _transitionExists(_getState(i),"refund");
+        require(exist , "O32");
+        require( _isAdmin(msg.sender) || _isSettlement(msg.sender) , "O33");
+        ERC20PresetMinterPauser token = ERC20PresetMinterPauser(bookkeepingtoken);
+        uint256 amount = _getSettledAmount(i);
+        require(token.balanceOf(i)==amount,"O34");
+        _setState(i,nextstate,_datetime);
+        _WithdrawERC20Token(i,bookkeepingtoken,amount,supplier_forfeit);
+    }
+    
+    
 
+    function getSellSideContractAddress(uint256 _i) public view
+    returns(address _a)
+    {
+        require( _isAdmin(msg.sender) || _isSales(msg.sender) || _isAccount(msg.sender) || _isSettlement(msg.sender) 
+                || _isExpense(msg.sender), "OP17");
+        return trades[_i];
+    }
+    
     
     function _transitionExists(string memory state,string memory funname) internal view
     returns(bool e,string memory s)

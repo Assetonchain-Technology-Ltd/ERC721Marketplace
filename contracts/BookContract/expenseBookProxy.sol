@@ -5,7 +5,7 @@ import "./expenseBookDS.sol";
 contract expenseBookProxy is expenseBookDS {
     
     event OrderStatusChange(uint256 ad, string status, string action,uint256 _datetime);
-    event NewOrderRequest(uint256 ad, address seller, uint256 itemID,uint256 p,uint256 f,string c,uint256 d);
+    event NewOrderRequest(address s,uint256 ad, address seller, uint256 itemID,uint256 p,uint256 f,string c,uint256 d);
     address public implementation;
 
 

@@ -7,7 +7,7 @@ import "./expenseBookDS.sol";
 contract expenseBookLibrary is expenseBookDS,baseContractAccessor {       
     
     event OrderStatusChange(uint256 ad, string status, string action,uint256 _datetime);
-    event NewOrderRequest(uint256 ad, address seller, uint256 itemID,uint256 p,uint256 f,string c,uint256 d);
+    event NewOrderRequest(address cd,uint256 ad, address seller, uint256 itemID,uint256 p,uint256 f,string c,uint256 d);
     
     function createOrderRequest(uint256 _itemID, uint256 _price, uint256 _feesprecentage, string memory _currency, uint256 _createdatetime,address _seller) public {
         address _baseaddr = lookup.getBaseAddress(_itemID);
@@ -28,7 +28,7 @@ contract expenseBookLibrary is expenseBookDS,baseContractAccessor {
         orders[id] = i;
         address2orders[i]=id;
         token[_itemID]=true;
-        emit NewOrderRequest(id,_seller,_itemID,_price,_feesprecentage,_currency,_createdatetime);
+        emit NewOrderRequest(i,id,_seller,_itemID,_price,_feesprecentage,_currency,_createdatetime);
         
     } 
     
@@ -86,8 +86,9 @@ contract expenseBookLibrary is expenseBookDS,baseContractAccessor {
         token[itemid]=false;
         _setState(i,nextstate,_datetime);
         emit OrderStatusChange(_orderid, nextstate,"cancelOrder",_datetime);
-         
+        
     }
+
     
      function addTrade(uint256 _orderid, uint256 _price, uint256 _datetime,string memory _currency) public {
         address i = orders[_orderid];
@@ -168,6 +169,22 @@ contract expenseBookLibrary is expenseBookDS,baseContractAccessor {
             _setState(i,nextstate,_datetime);
             emit OrderStatusChange(_orderid, nextstate,"settleOrder",_datetime);
         }
+    }
+    
+    
+    function refund(uint256 _orderid,uint256 _datetime) public{
+        address i = orders[_orderid];
+        (bool exist,string memory nextstate) = _transitionExists(_getState(i),"refund");
+        require(exist , "E34");
+        require( _isAdmin(msg.sender) || _isSettlement(msg.sender) , "E35");
+        ERC20PresetMinterPauser token = ERC20PresetMinterPauser(bookkeepingtoken);
+        uint256 amount = _getSettledAmount(i);
+        require(token.balanceOf(i)==amount,"E36");
+        _setState(i,nextstate,_datetime);
+        uint256 tradeid = _getSellSideCurrentTradeID(i);
+        address TradeAddress = orderbook.getSellSideContractAddress(tradeid);
+        _WithdrawERC20Token(i,bookkeepingtoken,amount,TradeAddress);
+        
     }
     
     

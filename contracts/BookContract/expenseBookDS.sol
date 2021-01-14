@@ -18,6 +18,7 @@ contract expenseBookDS is Access {
 
     address bookkeepingtoken;
     address contractfactory;
+
     orderbookLibrary orderbook;
     StateMachine statemachine;
     erc721DirectoryService lookup;

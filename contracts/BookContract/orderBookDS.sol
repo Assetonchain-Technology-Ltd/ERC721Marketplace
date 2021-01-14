@@ -22,6 +22,9 @@ contract orderBookDS is Access{
     address account_receivable;
     address platform;
     address platformfees;
+    address client_forfeit;
+    address supplier_forfeit;
+    address baddebt;
     StateMachine statemachine;
     erc721DirectoryService lookup;
     uint256 fixdeposit;

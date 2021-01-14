@@ -6,14 +6,19 @@ PSET : executeTrade -> PART
 PART : executeTrade -> EXEC  ** in function 
 PART : executeTrade -> PART
 PART : settleBuySide -> PART
-OPEN : cancelTrade  -> CANC
-PSET : cancelTrade  -> CANC
-PART : cancelTrade  -> CANC
+OPEN : cancelTrade  -> CANC-C
+OPEN : cancelTrade  -> CANC-S ** in function 
+PSET : cancelTrade  -> CANC-C
+PSET : cancelTrade  -> CANC-S ** in function 
+PART : cancelTrade  -> CANC-C
+PSET : cancelTrade  -> CANC-S ** in function 
 PART : expireTrade  -> EXPI
 PSET : expireTrade  -> EXPI
-EXEC : profitDistribution -> EXEC1
-CANC : settleBuySide -> CANC
-EXPI : settleBuySide -> EXPI
+EXEC : profitDistribution -> EXEC-SETTLE
+CANC-C : settleBuySide -> CANC-SETTLE
+CANC-C : forfeit -> CANC-SETTLE
+CANC-S : refund -> CANC-SETTLE
+EXPI : settleBuySide -> EXPI-SETTLE
 
 
 markTrade 0x94f84d9c36f5152d9fa88c82fb72e1e7a2911d125f55249dc8d1357f3de2c7a5

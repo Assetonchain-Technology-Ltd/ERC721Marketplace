@@ -6,7 +6,7 @@ contract orderBookProxy is orderBookDS {
     
     
     event TradeStatusChange(uint256 ad,string action,string status,address b,uint256 p,uint256 d);
-    event NewTrade(uint256 t, address seller, uint256 itemID,uint256 p,address o,uint256 m,uint256 _datetime);
+    event NewTrade(address i,uint256 t, address seller, uint256 itemID,uint256 p,address o,uint256 m,uint256 _datetime);
     address public implementation;
   
 
@@ -46,6 +46,21 @@ contract orderBookProxy is orderBookDS {
     function setplatformfees(address _a) public {
         require( _isCR(msg.sender) , "OP05");
         platformfees=_a;
+    }
+    
+    function setClientForfeit(address _a) public {
+        require( _isCR(msg.sender) , "OP24");
+        client_forfeit=_a;
+    }
+    
+    function setSupplierForfeit(address _a) public {
+        require( _isCR(msg.sender) , "OP26");
+        supplier_forfeit=_a;
+    }
+    
+    function setBadDebt(address _a) public {
+        require( _isCR(msg.sender) , "OP25");
+        baddebt=_a;
     }
     
     function setplatform(address _a) public {
@@ -113,7 +128,8 @@ contract orderBookProxy is orderBookDS {
     function getSellSideContractAddress(uint256 _i) public view
     returns(address _a)
     {
-        require( _isAdmin(msg.sender) || _isSales(msg.sender) || _isAccount(msg.sender) || _isSettlement(msg.sender) , "OP17");
+        require( _isAdmin(msg.sender) || _isSales(msg.sender) || _isAccount(msg.sender) || _isSettlement(msg.sender) 
+                || _isExpense(msg.sender), "OP17");
         return trades[_i];
     }
     

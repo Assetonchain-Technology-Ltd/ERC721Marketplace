@@ -11,6 +11,7 @@ INV : addSettlementPlan : INV
 INV : settleOrder  : INV
 INV : settleOrder  : SETTLE (in contract logic)
 INV : VOID         : INV-VOID
+CANC: refund       : CANC-SETTLE
 
 
 acceptRequest 0x0c7fb3d56856547144d2a30a77590071a28c565a1a2391f3fdcf7630cabc35d2  
