@@ -1,0 +1,1500 @@
+{
+  "contractName": "orderBookDS",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "isopen",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.2+commit.bacdbe57\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"isopen\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/dickchan/ERC721Marketplace/contracts/BookContract/orderBookDS.sol\":\"orderBookDS\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/dickchan/ERC721Marketplace/contracts/BookContract/orderBookDS.sol\":{\"keccak256\":\"0x06cf6e5c07c79bacf10dcadce30035b55e685fa0ce99b61f1bafb10ec2d31537\",\"urls\":[\"bzz-raw://0fff4fb1ad1af36d5264c81c56f2396f58cb8dcb0f59ee823d834163b3786010\",\"dweb:/ipfs/QmeDotYjmTrXvTX4kjpAKFWzkZCaKVyZTo5643tfDEjm2u\"]},\"/home/dickchan/ERC721Marketplace/contracts/BookContract/stateMachine.sol\":{\"keccak256\":\"0x8c0c0a32bfb45dfeddc7fb992c739029ad07e93f5002b160eb16e3bd869c0cb3\",\"urls\":[\"bzz-raw://b7c204c46fcdecea243b42eaf046bed2f4a0ce0fa4e85791f6abeeceef004e20\",\"dweb:/ipfs/QmVgiNEKWi4hkCdq3uz3JgyvYgn9zwtPGLLL2W5Dg9YH3H\"]},\"/home/dickchan/ERC721Marketplace/contracts/utils/access.sol\":{\"keccak256\":\"0x1113675fab33bbbaaf0c38019ef6e6e6f7bbe447332dcb20a160c7b24da783c1\",\"urls\":[\"bzz-raw://89b206e6722257908b9990a3d55d785e5dcfe0b1d818677f9fc914b088d4a41a\",\"dweb:/ipfs/QmXQLSojTnBUTAjYRPxtLRhsPkkxXZUwu7J9rfdiWpUrKY\"]},\"/home/dickchan/ERC721Marketplace/contracts/utils/erc721DirectoryLookup.sol\":{\"keccak256\":\"0x2d991ed7f91ee495d89310bb45bf78be066c2aa2f0032a04b2f38067e54e2dde\",\"urls\":[\"bzz-raw://f93087162184d558a2bc99fd8f6227c0e4089f0f32d5ba07395fe5195f58500d\",\"dweb:/ipfs/QmNodRuNsiZZLBavNx8nUooVqkXfGaW6gC8oFm2WYTLwLn\"]},\"openzeppelin-solidity/contracts/GSN/Context.sol\":{\"keccak256\":\"0xdb26cbf4d028490f49831a7865c2fe1b28db44b535ca8d343785a3b768aae183\",\"urls\":[\"bzz-raw://840b14ce0315c47d49ba328f1f9fa7654ded1c9e1559e6c5e777a7b2dc28bf0a\",\"dweb:/ipfs/QmTLLabn4wcfGro9LEmUXUN2nwKqZSotXMvjDCLXEnLtZP\"]},\"openzeppelin-solidity/contracts/access/AccessControl.sol\":{\"keccak256\":\"0x92f7900d382761c7faefeaced81c6b4f1aae909ed0551803bfe8f27101956360\",\"urls\":[\"bzz-raw://407c0864143968542e5cf5aa7556916d2cf292b201e3dadb65662e9a3aa24187\",\"dweb:/ipfs/QmSnXzYAUaGLGr7uofRbgQraTJvatbjQLBPhyYiMd18oUJ\"]},\"openzeppelin-solidity/contracts/access/RBAC.sol\":{\"keccak256\":\"0xddb7e538fb231fa214532b9cb7fc00ff727e70563b96a34acce28cde3649a016\",\"urls\":[\"bzz-raw://f893a06447db711199bf63100e8ce6a0d43b05afd41d5ac1ce0124ac0153d571\",\"dweb:/ipfs/QmVqncxoc4q1o5fcJiia6nTUCn7d4XkQCYguQRYLeQsF8r\"]},\"openzeppelin-solidity/contracts/introspection/ERC165.sol\":{\"keccak256\":\"0xb046d18f9d09683ca1c0ed6d80c61da8a8a7d9b30bad70a17b898538683eff74\",\"urls\":[\"bzz-raw://4728713afa6ae36cc9e92c7107c796a313add3ec20f813be2cde76c814486b2a\",\"dweb:/ipfs/QmUJBTXvYaGDF5PVnd5pUvYerc9DRXvqANDzgCzAp3FkkA\"]},\"openzeppelin-solidity/contracts/introspection/IERC165.sol\":{\"keccak256\":\"0xfa152b6e88a1dc50780e8f1580426dc23ad2e1e2c2f086a088adf206a202f453\",\"urls\":[\"bzz-raw://5127b264994adab88fae419b1c493efc5acd07134c19ee5c0397e50018291ebf\",\"dweb:/ipfs/QmWwJZVhvdmvUCdimbb6R2Jiu59zjPqm6XTMchM6LaEHAp\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x9a9cf02622cd7a64261b10534fc3260449da25c98c9e96d1b4ae8110a20e5806\",\"urls\":[\"bzz-raw://2df142592d1dc267d9549049ee3317fa190d2f87eaa565f86ab05ec83f7ab8f5\",\"dweb:/ipfs/QmSkJtcfWo7c42KnL5hho6GFxK6HRNV91XABx1P7xDtfLV\"]},\"openzeppelin-solidity/contracts/token/ERC721/ERC721.sol\":{\"keccak256\":\"0x1071a23188ba7f5bb16f51b0b01a67fd41fe56f862d8f83985788cf46f3b91bd\",\"urls\":[\"bzz-raw://c7082ca99b93f2e541cafaad00ed32675adf0752eab78eccabcf91dec9fd5d73\",\"dweb:/ipfs/QmdqooMmYBQVi7p6subDFM4e1944AuLjZUpHMjGtae7Lgd\"]},\"openzeppelin-solidity/contracts/token/ERC721/IERC721.sol\":{\"keccak256\":\"0x227bafd3e165b13f5d98c42a44376e48d41f4a265db8803f2707faaeae9659aa\",\"urls\":[\"bzz-raw://c9aa7959a30871669ce46172cd117b084b607d602d9ce695ce79005582b0b69b\",\"dweb:/ipfs/QmXZUWeLXmArQinHL4RnacJLT22GvCExqREYM6pHLX7CX9\"]},\"openzeppelin-solidity/contracts/token/ERC721/IERC721Enumerable.sol\":{\"keccak256\":\"0x3636662804cd8f474536b2875a9038a4c3fb91879f1bbff48af5c3f140fcd2f0\",\"urls\":[\"bzz-raw://9fab8521263fa581544000cb57335a3f2e6bcdfbb5579d3ceaa5acf741c67c4f\",\"dweb:/ipfs/QmZfXnMom7JSNtfyie5yGPN1SUC4SmHbz4ScVBH88URmA7\"]},\"openzeppelin-solidity/contracts/token/ERC721/IERC721Metadata.sol\":{\"keccak256\":\"0xe7f984cedc00a138dc27f263c73c32ba9a4b2fd23b6c34ac46f46c074b943538\",\"urls\":[\"bzz-raw://0f4acda12f076fe7584921241ddbb5b460ca7cad6cb8a42252ac7f2a9f539127\",\"dweb:/ipfs/QmQmfhkEv9GrhdWe67QtXnU19AMuoEmy31QnHPkucdYLjZ\"]},\"openzeppelin-solidity/contracts/token/ERC721/IERC721Receiver.sol\":{\"keccak256\":\"0x321ee37ef4925020aa818a03ec7fe48e057561f65ab009a84f6c20c86026ade7\",\"urls\":[\"bzz-raw://01f9d74a17a56024984251b97e428e24c9d3abffbae5bd290f0ec263c82e9694\",\"dweb:/ipfs/QmRryCuuXu2ukrDmatB8TqdEhPLiK6NBRt41RiPUaX1qKy\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xdfb4f812600ba4ce6738c35584ceb8c9433472583051b48ba5b1f66cb758a498\",\"urls\":[\"bzz-raw://df02dffe1c1de089d9b4f6192f0dcf464526f2230f420b3deec4645e0cdd2bff\",\"dweb:/ipfs/QmcqXGAU3KJqwrgUVoGJ2W8osomhSJ4R5kdsRpbuW3fELS\"]},\"openzeppelin-solidity/contracts/utils/Counters.sol\":{\"keccak256\":\"0x2d68b8e6425249cd05cc0a66ea50cb5b8d10cbdac59c6de834e1002232813faf\",\"urls\":[\"bzz-raw://e3ce6b6ac17c67bba01e9c8c778f82f68fd4823bd083359cdd03040b70eeeba3\",\"dweb:/ipfs/QmX4t1jWwKaAkacvmQxEG5rBtLXg3EHw6pRjKhMZR8iw3n\"]},\"openzeppelin-solidity/contracts/utils/EnumerableMap.sol\":{\"keccak256\":\"0x244e4b74b17716120cf28e58636f11c699b8c0c94628bd952a95cee038d7e32b\",\"urls\":[\"bzz-raw://198d566157120c526bd6b5086b32cae85a11389b8a538f533ba9f9447915da0e\",\"dweb:/ipfs/QmeE6d8KWERx7f1FVS5tMnitNJxBm2yWXRSEUBF7R6voLh\"]},\"openzeppelin-solidity/contracts/utils/EnumerableSet.sol\":{\"keccak256\":\"0xb2a11b236f073662f5a196995863f51c11d006bf7c3de158b316dfa1506c4b79\",\"urls\":[\"bzz-raw://8651649cf0b9efa18c3b01c030276fa320d41adbdc286833417e7f36e357b2f3\",\"dweb:/ipfs/QmafhM2Nd1aP43QVB1eRRZaqRXQKswNfQcWi8U8xjrxCfN\"]},\"openzeppelin-solidity/contracts/utils/Strings.sol\":{\"keccak256\":\"0x79484115dbfa737054f73e041009a02eeb434dd81be5d684bf4255ad3b5ab558\",\"urls\":[\"bzz-raw://12c119699463450c2544f5b9d8709b5e9e9164c62948a79c3ec53423a051d969\",\"dweb:/ipfs/QmPJduzSAaekq447QeFqAp3E7dc8CnNk5ajofckJ4ahA7Q\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5060c68061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063c70acf7a14602d575b600080fd5b605660048036036020811015604157600080fd5b81019080803590602001909291905050506070565b604051808215151515815260200191505060405180910390f35b600f6020528060005260406000206000915054906101000a900460ff168156fea26469706673582212202d2c7c862c244072e9984ddcd784229bbd6bb9fa672781c443e69af8080be6c164736f6c63430006020033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c8063c70acf7a14602d575b600080fd5b605660048036036020811015604157600080fd5b81019080803590602001909291905050506070565b604051808215151515815260200191505060405180910390f35b600f6020528060005260406000206000915054906101000a900460ff168156fea26469706673582212202d2c7c862c244072e9984ddcd784229bbd6bb9fa672781c443e69af8080be6c164736f6c63430006020033",
+  "sourceMap": "436:675:6:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;436:675:6;;;;;;;",
+  "deployedSourceMap": "436:675:6:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;436:675:6;;;;;;;;;;;;;;;;;;;1003:38;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1003:38:6;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.6.0;\n\nimport \"openzeppelin-solidity/contracts/math/SafeMath.sol\";\nimport \"openzeppelin-solidity/contracts/utils/Address.sol\";\nimport \"openzeppelin-solidity/contracts/utils/Counters.sol\";\nimport \"./stateMachine.sol\";\nimport \"../utils/access.sol\";\nimport \"openzeppelin-solidity/contracts/token/ERC721/ERC721.sol\";\nimport \"../utils/erc721DirectoryLookup.sol\";\n\n\n//contract expenseBook is  AccessControl, GSNRecipient {\n\ncontract orderBookDS is Access{   \n    using Counters for Counters.Counter;\n    using SafeMath for uint256;\n    using Address for address;\n\n    address expensebook;\n    address bookkeepingtoken;\n    address contractfactory;\n    address account_receivable;\n    address platform;\n    address platformfees;\n    StateMachine statemachine;\n    erc721DirectoryService lookup;\n    uint256 fixdeposit;\n    uint256 percentage_decimal;\n    uint256 depositpercentage;\n    uint256 expiryday;\n    \n    Counters.Counter  _tradeID;\n    \n    mapping(uint256 => address)  trades;\n    mapping(uint256 => bool) public isopen;\n    mapping(uint256 => uint256)  salesTrademap;\n    \n    \n    \n   \n}\n",
+  "sourcePath": "/home/dickchan/ERC721Marketplace/contracts/BookContract/orderBookDS.sol",
+  "ast": {
+    "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/BookContract/orderBookDS.sol",
+    "exportedSymbols": {
+      "orderBookDS": [
+        1963
+      ]
+    },
+    "id": 1964,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1906,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:6"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/math/SafeMath.sol",
+        "file": "openzeppelin-solidity/contracts/math/SafeMath.sol",
+        "id": 1907,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 8165,
+        "src": "25:59:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/utils/Address.sol",
+        "file": "openzeppelin-solidity/contracts/utils/Address.sol",
+        "id": 1908,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 10271,
+        "src": "85:59:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/utils/Counters.sol",
+        "file": "openzeppelin-solidity/contracts/utils/Counters.sol",
+        "id": 1909,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 10320,
+        "src": "145:60:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/BookContract/stateMachine.sol",
+        "file": "./stateMachine.sol",
+        "id": 1910,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 3760,
+        "src": "206:28:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/utils/access.sol",
+        "file": "../utils/access.sol",
+        "id": 1911,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 6467,
+        "src": "235:29:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol",
+        "file": "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol",
+        "id": 1912,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 9842,
+        "src": "265:65:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/utils/erc721DirectoryLookup.sol",
+        "file": "../utils/erc721DirectoryLookup.sol",
+        "id": 1913,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 7443,
+        "src": "331:44:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1914,
+              "name": "Access",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6466,
+              "src": "460:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Access_$6466",
+                "typeString": "contract Access"
+              }
+            },
+            "id": 1915,
+            "nodeType": "InheritanceSpecifier",
+            "src": "460:6:6"
+          }
+        ],
+        "contractDependencies": [
+          6466
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1963,
+        "linearizedBaseContracts": [
+          1963,
+          6466
+        ],
+        "name": "orderBookDS",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 1918,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1916,
+              "name": "Counters",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10319,
+              "src": "481:8:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Counters_$10319",
+                "typeString": "library Counters"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "475:36:6",
+            "typeName": {
+              "contractScope": null,
+              "id": 1917,
+              "name": "Counters.Counter",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10279,
+              "src": "494:16:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Counter_$10279_storage_ptr",
+                "typeString": "struct Counters.Counter"
+              }
+            }
+          },
+          {
+            "id": 1921,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1919,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8164,
+              "src": "522:8:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$8164",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "516:27:6",
+            "typeName": {
+              "id": 1920,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "535:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "id": 1924,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1922,
+              "name": "Address",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10270,
+              "src": "554:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Address_$10270",
+                "typeString": "library Address"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "548:26:6",
+            "typeName": {
+              "id": 1923,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "566:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 1926,
+            "name": "expensebook",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "580:19:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1925,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "580:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1928,
+            "name": "bookkeepingtoken",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "605:24:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1927,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "605:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1930,
+            "name": "contractfactory",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "635:23:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1929,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "635:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1932,
+            "name": "account_receivable",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "664:26:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1931,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "664:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1934,
+            "name": "platform",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "696:16:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1933,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "696:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1936,
+            "name": "platformfees",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "718:20:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1935,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "718:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1938,
+            "name": "statemachine",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "744:25:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_StateMachine_$3759",
+              "typeString": "contract StateMachine"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1937,
+              "name": "StateMachine",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3759,
+              "src": "744:12:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_StateMachine_$3759",
+                "typeString": "contract StateMachine"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1940,
+            "name": "lookup",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "775:29:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_erc721DirectoryService_$7442",
+              "typeString": "contract erc721DirectoryService"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1939,
+              "name": "erc721DirectoryService",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7442,
+              "src": "775:22:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_erc721DirectoryService_$7442",
+                "typeString": "contract erc721DirectoryService"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1942,
+            "name": "fixdeposit",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "810:18:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1941,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "810:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1944,
+            "name": "percentage_decimal",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "834:26:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1943,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "834:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1946,
+            "name": "depositpercentage",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "866:25:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1945,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "866:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1948,
+            "name": "expiryday",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "897:17:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1947,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "897:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1950,
+            "name": "_tradeID",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "925:26:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Counter_$10279_storage",
+              "typeString": "struct Counters.Counter"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1949,
+              "name": "Counters.Counter",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10279,
+              "src": "925:16:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Counter_$10279_storage_ptr",
+                "typeString": "struct Counters.Counter"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1954,
+            "name": "trades",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "962:35:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+              "typeString": "mapping(uint256 => address)"
+            },
+            "typeName": {
+              "id": 1953,
+              "keyType": {
+                "id": 1951,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "970:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "962:27:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                "typeString": "mapping(uint256 => address)"
+              },
+              "valueType": {
+                "id": 1952,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "981:7:6",
+                "stateMutability": "nonpayable",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "functionSelector": "c70acf7a",
+            "id": 1958,
+            "name": "isopen",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "1003:38:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_bool_$",
+              "typeString": "mapping(uint256 => bool)"
+            },
+            "typeName": {
+              "id": 1957,
+              "keyType": {
+                "id": 1955,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1011:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1003:24:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_bool_$",
+                "typeString": "mapping(uint256 => bool)"
+              },
+              "valueType": {
+                "id": 1956,
+                "name": "bool",
+                "nodeType": "ElementaryTypeName",
+                "src": "1022:4:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1962,
+            "name": "salesTrademap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "1047:42:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+              "typeString": "mapping(uint256 => uint256)"
+            },
+            "typeName": {
+              "id": 1961,
+              "keyType": {
+                "id": 1959,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1055:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1047:27:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                "typeString": "mapping(uint256 => uint256)"
+              },
+              "valueType": {
+                "id": 1960,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1066:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 1964,
+        "src": "436:675:6"
+      }
+    ],
+    "src": "0:1112:6"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/BookContract/orderBookDS.sol",
+    "exportedSymbols": {
+      "orderBookDS": [
+        1963
+      ]
+    },
+    "id": 1964,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1906,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:6"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/math/SafeMath.sol",
+        "file": "openzeppelin-solidity/contracts/math/SafeMath.sol",
+        "id": 1907,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 8165,
+        "src": "25:59:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/utils/Address.sol",
+        "file": "openzeppelin-solidity/contracts/utils/Address.sol",
+        "id": 1908,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 10271,
+        "src": "85:59:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/utils/Counters.sol",
+        "file": "openzeppelin-solidity/contracts/utils/Counters.sol",
+        "id": 1909,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 10320,
+        "src": "145:60:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/BookContract/stateMachine.sol",
+        "file": "./stateMachine.sol",
+        "id": 1910,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 3760,
+        "src": "206:28:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/utils/access.sol",
+        "file": "../utils/access.sol",
+        "id": 1911,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 6467,
+        "src": "235:29:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol",
+        "file": "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol",
+        "id": 1912,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 9842,
+        "src": "265:65:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/dickchan/ERC721Marketplace/contracts/utils/erc721DirectoryLookup.sol",
+        "file": "../utils/erc721DirectoryLookup.sol",
+        "id": 1913,
+        "nodeType": "ImportDirective",
+        "scope": 1964,
+        "sourceUnit": 7443,
+        "src": "331:44:6",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1914,
+              "name": "Access",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6466,
+              "src": "460:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Access_$6466",
+                "typeString": "contract Access"
+              }
+            },
+            "id": 1915,
+            "nodeType": "InheritanceSpecifier",
+            "src": "460:6:6"
+          }
+        ],
+        "contractDependencies": [
+          6466
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1963,
+        "linearizedBaseContracts": [
+          1963,
+          6466
+        ],
+        "name": "orderBookDS",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 1918,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1916,
+              "name": "Counters",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10319,
+              "src": "481:8:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Counters_$10319",
+                "typeString": "library Counters"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "475:36:6",
+            "typeName": {
+              "contractScope": null,
+              "id": 1917,
+              "name": "Counters.Counter",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10279,
+              "src": "494:16:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Counter_$10279_storage_ptr",
+                "typeString": "struct Counters.Counter"
+              }
+            }
+          },
+          {
+            "id": 1921,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1919,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8164,
+              "src": "522:8:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$8164",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "516:27:6",
+            "typeName": {
+              "id": 1920,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "535:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "id": 1924,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1922,
+              "name": "Address",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10270,
+              "src": "554:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Address_$10270",
+                "typeString": "library Address"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "548:26:6",
+            "typeName": {
+              "id": 1923,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "566:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 1926,
+            "name": "expensebook",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "580:19:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1925,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "580:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1928,
+            "name": "bookkeepingtoken",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "605:24:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1927,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "605:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1930,
+            "name": "contractfactory",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "635:23:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1929,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "635:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1932,
+            "name": "account_receivable",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "664:26:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1931,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "664:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1934,
+            "name": "platform",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "696:16:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1933,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "696:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1936,
+            "name": "platformfees",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "718:20:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1935,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "718:7:6",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1938,
+            "name": "statemachine",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "744:25:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_StateMachine_$3759",
+              "typeString": "contract StateMachine"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1937,
+              "name": "StateMachine",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3759,
+              "src": "744:12:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_StateMachine_$3759",
+                "typeString": "contract StateMachine"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1940,
+            "name": "lookup",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "775:29:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_erc721DirectoryService_$7442",
+              "typeString": "contract erc721DirectoryService"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1939,
+              "name": "erc721DirectoryService",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7442,
+              "src": "775:22:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_erc721DirectoryService_$7442",
+                "typeString": "contract erc721DirectoryService"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1942,
+            "name": "fixdeposit",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "810:18:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1941,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "810:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1944,
+            "name": "percentage_decimal",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "834:26:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1943,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "834:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1946,
+            "name": "depositpercentage",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "866:25:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1945,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "866:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1948,
+            "name": "expiryday",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "897:17:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1947,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "897:7:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1950,
+            "name": "_tradeID",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "925:26:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Counter_$10279_storage",
+              "typeString": "struct Counters.Counter"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1949,
+              "name": "Counters.Counter",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 10279,
+              "src": "925:16:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_Counter_$10279_storage_ptr",
+                "typeString": "struct Counters.Counter"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1954,
+            "name": "trades",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "962:35:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+              "typeString": "mapping(uint256 => address)"
+            },
+            "typeName": {
+              "id": 1953,
+              "keyType": {
+                "id": 1951,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "970:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "962:27:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                "typeString": "mapping(uint256 => address)"
+              },
+              "valueType": {
+                "id": 1952,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "981:7:6",
+                "stateMutability": "nonpayable",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "functionSelector": "c70acf7a",
+            "id": 1958,
+            "name": "isopen",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "1003:38:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_bool_$",
+              "typeString": "mapping(uint256 => bool)"
+            },
+            "typeName": {
+              "id": 1957,
+              "keyType": {
+                "id": 1955,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1011:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1003:24:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_bool_$",
+                "typeString": "mapping(uint256 => bool)"
+              },
+              "valueType": {
+                "id": 1956,
+                "name": "bool",
+                "nodeType": "ElementaryTypeName",
+                "src": "1022:4:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1962,
+            "name": "salesTrademap",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1963,
+            "src": "1047:42:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+              "typeString": "mapping(uint256 => uint256)"
+            },
+            "typeName": {
+              "id": 1961,
+              "keyType": {
+                "id": 1959,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1055:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1047:27:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                "typeString": "mapping(uint256 => uint256)"
+              },
+              "valueType": {
+                "id": 1960,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "1066:7:6",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 1964,
+        "src": "436:675:6"
+      }
+    ],
+    "src": "0:1112:6"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.2+commit.bacdbe57.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2020-11-19T07:51:27.190Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
